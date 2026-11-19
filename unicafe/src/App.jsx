@@ -1,5 +1,31 @@
 import { useState } from 'react';
 
+const Statistics = ({ good, neutral, bad }) => {
+  const positivePercentage = Number.isFinite(
+    (good / (good + neutral + bad)) * 100,
+  )
+    ? (good / (good + neutral + bad)) * 100
+    : 0;
+  const average = Number.isFinite((good - bad) / (good + neutral + bad))
+    ? (good - bad) / (good + neutral + bad)
+    : 0;
+  const total = Number.isFinite(good + neutral + bad)
+    ? good + neutral + bad
+    : 0;
+  return (
+    <div>
+      <h2>Statistics</h2>
+
+      <p>Good:{good}</p>
+      <p>Neutral:{neutral}</p>
+      <p>Bad:{bad}</p>
+      <p>All: {total}</p>
+      <p>Average: {average}</p>
+      <p>Positive: {positivePercentage}%</p>
+    </div>
+  );
+};
+
 const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
@@ -26,30 +52,7 @@ const App = () => {
       <button onClick={handleNeutralClick}>Neutral</button>
       <button onClick={handleBadClick}>Bad</button>
 
-      <div>
-        <h2>Statistics</h2>
-
-        <p>Good:{good}</p>
-        <p>Neutral:{neutral}</p>
-        <p>Bad:{bad}</p>
-        <p>
-          All:{' '}
-          {Number.isFinite(good + neutral + bad) ? good + neutral + bad : 0}
-        </p>
-        <p>
-          Average:{' '}
-          {Number.isFinite((good - bad) / (good + neutral + bad))
-            ? (good - bad) / (good + neutral + bad)
-            : 0}
-        </p>
-        <p>
-          Positive:{' '}
-          {Number.isFinite((good / (good + neutral + bad)) * 100)
-            ? (good / (good + neutral + bad)) * 100
-            : 0}
-          %
-        </p>
-      </div>
+      <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
   );
 };
