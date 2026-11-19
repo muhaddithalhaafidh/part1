@@ -32,6 +32,23 @@ const App = () => {
         <p>Good:{good}</p>
         <p>Neutral:{neutral}</p>
         <p>Bad:{bad}</p>
+        <p>
+          All:{' '}
+          {Number.isFinite(good + neutral + bad) ? good + neutral + bad : 0}
+        </p>
+        <p>
+          Average:{' '}
+          {Number.isFinite((good - bad) / (good + neutral + bad))
+            ? (good - bad) / (good + neutral + bad)
+            : 0}
+        </p>
+        <p>
+          Positive:{' '}
+          {Number.isFinite((good / (good + neutral + bad)) * 100)
+            ? (good / (good + neutral + bad)) * 100
+            : 0}
+          %
+        </p>
       </div>
     </div>
   );
