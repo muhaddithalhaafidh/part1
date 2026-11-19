@@ -1,17 +1,11 @@
 import { useState } from 'react';
 
 const Statistics = ({ good, neutral, bad }) => {
-  const positivePercentage = Number.isFinite(
-    (good / (good + neutral + bad)) * 100,
-  )
-    ? (good / (good + neutral + bad)) * 100
-    : 0;
-  const average = Number.isFinite((good - bad) / (good + neutral + bad))
-    ? (good - bad) / (good + neutral + bad)
-    : 0;
-  const total = Number.isFinite(good + neutral + bad)
-    ? good + neutral + bad
-    : 0;
+  const positivePercentage = (good / (good + neutral + bad)) * 100;
+  const average = (good - bad) / (good + neutral + bad);
+  const total = good + neutral + bad;
+  if (good === 0 && neutral === 0 && bad === 0) return <p>No feedback given</p>;
+
   return (
     <div>
       <h2>Statistics</h2>
